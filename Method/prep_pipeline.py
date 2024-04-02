@@ -7,11 +7,7 @@ Some of the common text preprocessing / cleaning steps are:
 - Removal of Numbers: v
 - Removal of Punctuations:  v
 - Removal of Stopwords: v
-- Removal of Frequent words: Optional
-- Removal of Rare words: Optional
-- Stemming
-- Lemmatization
-- Spelling correction: 
+- Lemmatization: v
 
 """
 import pandas as pd
@@ -40,6 +36,7 @@ def lemmatization(texts,allowed_postags=['NOUN', 'ADJ']):
 
 
 def preprocess_data(data):
+    data = data.drop_duplicates(subset = 'Text')
     # Choose text >= 20
     data['Num_words_text'] = data['Text'].apply(lambda x:len(str(x).split())) 
     df_filtered_reviews = data[(data['Num_words_text'] >=20)]
@@ -81,7 +78,7 @@ def preprocess_text(text):
 
 def preprocess_text_1(text):
     '''Taking only Nouns from reviews'''
-        # Lowercasing
+    # Lowercasing
     text = text.lower()
     
     # Removing punctuation
